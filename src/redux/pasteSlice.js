@@ -3,22 +3,26 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     //currenting storing it locally in key value format for the time being
     // If we find the data locally use it else use empty array
-    pastes: localStorage.getItem("pastes") ? JSON.parse(localStorage.getItem("pastes")) : []
+   pastes: localStorage.getItem("pastes") ? JSON.parse(localStorage.getItem("pastes")) : []
 }
 
 export const pasteSlice = createSlice({
   name: 'pastes',
   initialState,
   reducers: {
-    increment: state => {
-      state.value += 1
+    assToPastes: (state,action) => {
+      
     },
-    decrement: state => {
-      state.value -= 1
+    updateToPastes: (state,action) => {
+      
     },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload
-    }
+    resetAllPastes: (state, action) => {
+      
+    },
+    removeFromPaste: (state,action) =>{
+
+    },
+
   }
 })
 

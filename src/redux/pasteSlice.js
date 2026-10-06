@@ -10,7 +10,7 @@ export const pasteSlice = createSlice({
   name: 'pastes',
   initialState,
   reducers: {
-    assToPastes: (state,action) => {
+    addToPastes: (state,action) => {
       
     },
     updateToPastes: (state,action) => {
@@ -26,6 +26,6 @@ export const pasteSlice = createSlice({
   }
 })
 
-export const { assToPastes, updateToPastes, resetAllPastes, removeFromPaste } = pasteSliceSlice.actions
+export const { addToPastes, updateToPastes, resetAllPastes, removeFromPaste } = pasteSlice.actions
 
-export default pasteSliceSlice.reducer
+export default pasteSlice.reducer

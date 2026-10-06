@@ -1,12 +1,37 @@
-import { useState } from 'react'
-
+import {createBrowserRouter} from 'react-router-dom'
 import './App.css'
 
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element:
+      <div>
+
+      </div>
+    },
+    {
+      path: "/pastes",
+      element:
+      <div>
+
+      </div>
+    },
+    {
+      path: "/pastes/:id",
+      element:
+      <div>
+        
+      </div>
+    }
+  ]
+);
+
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
-    <h1 className="text-2xl font-bold text-blue-500"> Hello World</h1>
+    <h1>hello world</h1>
   )
 }
 

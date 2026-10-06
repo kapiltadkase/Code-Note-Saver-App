@@ -26,6 +26,6 @@ export const pasteSlice = createSlice({
   }
 })
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions
+export const { assToPastes, updateToPastes, resetAllPastes, removeFromPaste } = pasteSliceSlice.actions
 
-export default counterSlice.reducer
+export default pasteSliceSlice.reducer

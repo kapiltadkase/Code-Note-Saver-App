@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    //currenting storing it locally for the time being
+    //currenting storing it locally in key value format for the time being
     // If we find the data locally use it else use empty array
     pastes: localStorage.getItem("pastes") ? JSON.parse(localStorage.getItem("pastes")) : []
 }

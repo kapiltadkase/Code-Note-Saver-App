@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
+import { addToPastes, updateToPastes } from '../redux/pasteSlice';
 
 const Home = () => {
 

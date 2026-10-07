@@ -1,13 +1,41 @@
 import React from 'react'
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 
 const Home = () => {
 
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
   const [value, setValue] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const pasteId = searchParams.get("pasteId");
+  const dispatch = useDispatch();                                      // to dispatch the reducer
+
+  // handler for what happen when create paste button is clicked
+  function createPaste(){
+    // role is to create paste and send it to slice
+    const paste = {
+      title: title,    
+      content: value,
+      _id: pasteId || Date.now().toString(36),
+      createdAt: new Date().toISOString(),
+    }
+
+
+    if(pasteId){
+      // if pasteId already present then we are trying to update the already existing paste
+      dispatch(updateToPastes(paste));
+    }
+    else{
+      // we are creating a new paste
+      dispatch(addToPastes(paste))
+    }
+
+    // after creation or updation we want to clear all input field
+    setTitle('');
+    setValue('')
+    setSearchParams({});
+  }
 
   return (
     <div>
@@ -20,7 +48,10 @@ const Home = () => {
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        <button className='bg-black rounded-md px-2'>
+        <button 
+          className='bg-black rounded-md px-2'
+          onClick={createPaste}
+        >
           { 
             pasteId ? "Update Paste" : "Create Paste"
           }

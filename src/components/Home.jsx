@@ -22,8 +22,11 @@ const Home = () => {
         setTitle(findPaste.title);
         setValue(findPaste.content);
       }
+    } else {
+      setTitle('');
+      setValue('');
     }
-  }, [pasteId, allPastes]);
+  }, [pasteId]);
 
   // handler for what happen when create paste button is clicked
   function createPaste() {

@@ -15,8 +15,17 @@ export const pasteSlice = createSlice({
     addToPastes: (state, action) => {
       const paste = action.payload;         // fetching the paste that was created
 
-      // add a check to make sure that the title that is give doesnt already exists
-      const isAlreadyExists = state.pastes.find((item) => item.title.trim().toLowerCase() == paste.title.trim().toLowerCase());
+      // Check if title is empty
+      if (!paste?.title || paste.title.trim() === '') {
+        toast.error("Title cannot be empty");
+        return;
+      }
+
+      // Check to make sure that a paste with the same title doesn't already exist
+      const isAlreadyExists = state.pastes.some(
+        (item) => item?.title?.trim().toLowerCase() === paste.title.trim().toLowerCase()
+      );
+
       if (isAlreadyExists) {
         toast.error("Paste with this title already exists");
         return;
@@ -25,17 +34,28 @@ export const pasteSlice = createSlice({
       state.pastes.push(paste);             // pushing the paste in our array of pastes
       localStorage.setItem("pastes", JSON.stringify(state.pastes));              // adding the updated pastes array back to the local storage use key value pair
 
-      toast('Paste Created Successfully')
-
+      toast.success('Paste Created Successfully');
     },
     updateToPastes: (state, action) => {
       const updatedPaste = action.payload;
       const index = state.pastes.findIndex((item) => (item._id || item.id) === (updatedPaste._id || updatedPaste.id));
 
       if (index >= 0) {
+        // Check if another paste already has this title
+        const isAlreadyExists = state.pastes.some(
+          (item) =>
+            (item._id || item.id) !== (updatedPaste._id || updatedPaste.id) &&
+            item?.title?.trim().toLowerCase() === updatedPaste?.title?.trim().toLowerCase()
+        );
+
+        if (isAlreadyExists) {
+          toast.error("Paste with this title already exists");
+          return;
+        }
+
         state.pastes[index] = updatedPaste;
         localStorage.setItem("pastes", JSON.stringify(state.pastes));
-        toast('Paste Updated Successfully');
+        toast.success('Paste Updated Successfully');
       }
     },
     resetAllPastes: (state, action) => {

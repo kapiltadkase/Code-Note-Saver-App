@@ -18,7 +18,8 @@ export const pasteSlice = createSlice({
       // add a check to make sure that the title that is give doesnt already exists
       const isAlreadyExists = state.pastes.find((item) => item.title.trim().toLowerCase() == paste.title.trim().toLowerCase());
       if (isAlreadyExists) {
-        return toast.error("Paste with this title already exists");
+        toast.error("Paste with this title already exists");
+        return;
       }
 
       state.pastes.push(paste);             // pushing the paste in our array of pastes

@@ -7,7 +7,7 @@ const Paste = () => {
   const dispatch = useDispatch();
 
   const filteredData = pastes.filter(
-    (paste) => paste.title.toLowerCase().includes(searchTerm.toLowerCase())
+    (paste) => paste.title?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -19,6 +19,27 @@ const Paste = () => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
+
+      <div className='flex flex-col justify-center gap-5'>
+        {
+          filteredData.length > 0 &&
+          filteredData.map((paste) => {
+            return (
+              <div className='border p-2 min-w-[600px]'>
+                <div>{paste.title}</div>
+                <div>{paste.content}</div>
+                <div className='flex flex-row gap-4 place-content-evenly bg-black mt-2'>
+                  <button>Edit</button>
+                  <button>Copy</button>
+                  <button onClick={handleDelete}>Delete</button>
+                  <button>Share</button>
+                </div>
+                <div>{paste.createdAt}</div>
+              </div>
+            )
+          })
+        }
+      </div>
     </div>
   )
 }

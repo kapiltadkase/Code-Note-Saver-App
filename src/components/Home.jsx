@@ -18,7 +18,7 @@ const Home = () => {
     const paste = {
       title: title,    
       content: value,
-      _id: pasteId || Date.now().toString(36),
+      id: pasteId || Date.now().toString(36),
       createdAt: new Date().toISOString(),
     }
 

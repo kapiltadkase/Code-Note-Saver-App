@@ -36,7 +36,8 @@ const Paste = () => {
                 <div className='flex flex-row gap-4 place-content-evenly bg-black mt-2'>
                   <button>Edit</button>
                   <button>View</button>
-                  <button>Copy</button>
+                  <button onClick={() => navigator.clipboard.writeText(paste.content)}>Copy</button>
+
                   <button onClick={() => handleDelete(paste?._id || paste?.id)}>Delete</button>
 
                   <button>Share</button>

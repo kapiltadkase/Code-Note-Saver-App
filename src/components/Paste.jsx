@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeFromPastes } from '../redux/pasteSlice';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 const Paste = () => {
   const pastes = useSelector((state) => state.paste.pastes);
@@ -38,7 +39,7 @@ const Paste = () => {
 
                   <button>Edit</button>
 
-                  <button>View</button>
+                  <button><Link to={`/pastes/${paste?._id || paste?.id}`}>View</Link></button>
 
                   <button onClick={() => {
                     navigator.clipboard.writeText(paste.content);

@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { addToPastes, updateToPastes } from '../redux/pasteSlice';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
 
@@ -11,6 +12,18 @@ const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const pasteId = searchParams.get("pasteId");
   const dispatch = useDispatch();                                      // to dispatch the reducer
+
+  const allPastes = useSelector((state) => state.paste.pastes);
+
+  useEffect(() => {
+    if (pasteId) {
+      const findPaste = allPastes.find((paste) => (paste._id || paste.id) === pasteId);
+      if (findPaste) {
+        setTitle(findPaste.title);
+        setValue(findPaste.content);
+      }
+    }
+  }, [pasteId, allPastes]);
 
   // handler for what happen when create paste button is clicked
   function createPaste() {
@@ -21,7 +34,6 @@ const Home = () => {
       _id: pasteId || Date.now().toString(36),
       createdAt: new Date().toISOString(),
     }
-
 
     if (pasteId) {
       // if pasteId already present then we are trying to update the already existing paste

@@ -37,7 +37,7 @@ const Paste = () => {
                 <div>{paste.content}</div>
                 <div className='flex flex-row gap-4 place-content-evenly bg-black mt-2'>
 
-                  <button>Edit</button>
+                  <button><Link to={`/?pasteId=${paste?._id || paste?.id}`}>Edit</Link></button>
 
                   <button><Link to={`/pastes/${paste?._id || paste?.id}`}>View</Link></button>
 

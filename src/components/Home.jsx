@@ -13,21 +13,21 @@ const Home = () => {
   const dispatch = useDispatch();                                      // to dispatch the reducer
 
   // handler for what happen when create paste button is clicked
-  function createPaste(){
+  function createPaste() {
     // role is to create paste and send it to slice
     const paste = {
-      title: title,    
+      title: title,
       content: value,
-      id: pasteId || Date.now().toString(36),
+      _id: pasteId || Date.now().toString(36),
       createdAt: new Date().toISOString(),
     }
 
 
-    if(pasteId){
+    if (pasteId) {
       // if pasteId already present then we are trying to update the already existing paste
       dispatch(updateToPastes(paste));
     }
-    else{
+    else {
       // we are creating a new paste
       dispatch(addToPastes(paste))
     }
@@ -49,11 +49,11 @@ const Home = () => {
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        <button 
+        <button
           className='bg-black rounded-md px-2'
           onClick={createPaste}
         >
-          { 
+          {
             pasteId ? "Update Paste" : "Create Paste"
           }
         </button>

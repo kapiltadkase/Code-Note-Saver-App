@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { removeFromPastes } from '../redux/pasteSlice';
 
 const Paste = () => {
   const pastes = useSelector((state) => state.paste.pastes);
@@ -9,6 +10,10 @@ const Paste = () => {
   const filteredData = pastes.filter(
     (paste) => paste.title?.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  function handleDelete(pasteId) {
+    dispatch(removeFromPastes(pasteId));
+  }
 
   return (
     <div>
@@ -25,13 +30,15 @@ const Paste = () => {
           filteredData.length > 0 &&
           filteredData.map((paste) => {
             return (
-              <div className='border p-2 min-w-[600px]'>
+              <div key={paste?._id || paste?.id} className='border p-2 min-w-[600px]'>
                 <div>{paste.title}</div>
                 <div>{paste.content}</div>
                 <div className='flex flex-row gap-4 place-content-evenly bg-black mt-2'>
                   <button>Edit</button>
+                  <button>View</button>
                   <button>Copy</button>
-                  <button onClick={handleDelete}>Delete</button>
+                  <button onClick={() => handleDelete(paste?._id || paste?.id)}>Delete</button>
+
                   <button>Share</button>
                 </div>
                 <div>{paste.createdAt}</div>
